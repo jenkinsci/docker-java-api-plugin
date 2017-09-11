@@ -14,11 +14,12 @@
 
     <name>Docker API Plugin</name>
     <description>Plugin providing Docker API for other plugins. Wrap docker-java and required dependency for Netty transport only. JAX-RS default transport is not usable</description>
+    <url>https://wiki.jenkins.io/display/JENKINS/Docker+Java+API+Plugin</url>
 
     <scm>
-        <connection>scm:git:ssh://github.com/dockins/docker-api-plugin.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com/dockins/docker-api-plugin.git</developerConnection>
-        <url>https://github.com/dockins/docker-api-plugin</url>
+        <connection>scm:git:ssh://github.com/jenkinsci/docker-java-api-plugin.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/jenkinsci/docker-java-api-plugin.git</developerConnection>
+        <url>https://github.com/jenkinsci/docker-java-api-plugin</url>
         <tag>HEAD</tag>
     </scm>
 
