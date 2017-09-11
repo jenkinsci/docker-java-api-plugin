@@ -9,7 +9,7 @@
     </parent>
 
     <artifactId>docker-java-api</artifactId>
-    <version>3.0.13</version>
+    <version>3.0.14-SNAPSHOT</version>
     <packaging>hpi</packaging>
 
     <name>Docker API Plugin</name>
@@ -20,7 +20,7 @@
         <connection>scm:git:ssh://github.com/jenkinsci/docker-java-api-plugin.git</connection>
         <developerConnection>scm:git:ssh://git@github.com/jenkinsci/docker-java-api-plugin.git</developerConnection>
         <url>https://github.com/jenkinsci/docker-java-api-plugin</url>
-        <tag>docker-java-api-3.0.13</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <properties>
