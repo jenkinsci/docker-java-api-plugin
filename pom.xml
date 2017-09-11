@@ -9,7 +9,7 @@
     </parent>
 
     <artifactId>docker-java-api</artifactId>
-    <version>3.0.0-SNAPSHOT</version>
+    <version>3.0.13-SNAPSHOT</version>
     <packaging>hpi</packaging>
 
     <name>Docker API Plugin</name>
@@ -51,7 +51,7 @@
         <dependency>
             <groupId>com.github.docker-java</groupId>
             <artifactId>docker-java</artifactId>
-            <version>3.0.0</version>
+            <version>3.0.13</version>
             <exclusions>
                 <!-- use the version supplied by jackson2-api -->
                 <exclusion>
