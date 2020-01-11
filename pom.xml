@@ -5,11 +5,11 @@
     <parent>
         <groupId>org.jenkins-ci.plugins</groupId>
         <artifactId>plugin</artifactId>
-        <version>2.9</version>
+        <version>3.19</version>
     </parent>
 
     <artifactId>docker-java-api</artifactId>
-    <version>3.0.14-SNAPSHOT</version>
+    <version>${revision}${changelist}</version>
     <packaging>hpi</packaging>
 
     <name>Docker API Plugin</name>
@@ -24,8 +24,10 @@
     </scm>
 
     <properties>
-        <jenkins.version>1.609.1</jenkins.version>
-        <java.level>7</java.level>
+        <revision>3.0.14</revision>
+        <changelist>-SNAPSHOT</changelist>
+        <jenkins.version>2.60.3</jenkins.version>
+        <java.level>8</java.level>
     </properties>
 
     <licenses>
