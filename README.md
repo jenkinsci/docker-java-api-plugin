@@ -1,10 +1,9 @@
 # Docker Java API Plugin
 
 This plugin exposes the [docker-java](http://github.com/docker-java/docker-java) API to Jenkins plugins.
+Plugins using docker-java should depend on this plugin and not directly on docker-java.
 
 Only Netty based transport is available, JAX-RS default implementation doesn't work.
-
-See also this [plugin's wiki page][wiki]
 
 # Environment
 
