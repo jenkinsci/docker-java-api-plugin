@@ -5,11 +5,11 @@
     <parent>
         <groupId>org.jenkins-ci.plugins</groupId>
         <artifactId>plugin</artifactId>
-        <version>2.9</version>
+        <version>3.56</version>
     </parent>
 
     <artifactId>docker-java-api</artifactId>
-    <version>3.0.14-SNAPSHOT</version>
+    <version>${revision}${changelist}</version>
     <packaging>hpi</packaging>
 
     <name>Docker API Plugin</name>
@@ -20,12 +20,14 @@
         <connection>scm:git:ssh://github.com/jenkinsci/docker-java-api-plugin.git</connection>
         <developerConnection>scm:git:ssh://git@github.com/jenkinsci/docker-java-api-plugin.git</developerConnection>
         <url>https://github.com/jenkinsci/docker-java-api-plugin</url>
-        <tag>HEAD</tag>
+        <tag>${scmTag}</tag>
     </scm>
 
     <properties>
+        <revision>3.1.5</revision>
+        <changelist>-SNAPSHOT</changelist>
         <jenkins.version>1.609.1</jenkins.version>
-        <java.level>7</java.level>
+        <java.level>8</java.level>
     </properties>
 
     <licenses>
@@ -52,7 +54,7 @@
         <dependency>
             <groupId>com.github.docker-java</groupId>
             <artifactId>docker-java</artifactId>
-            <version>3.0.13</version>
+            <version>${revision}</version>
             <exclusions>
                 <!-- use the version supplied by jackson2-api -->
                 <exclusion>
@@ -62,6 +64,12 @@
                 <exclusion>
                     <groupId>com.fasterxml.jackson.jaxrs</groupId>
                     <artifactId>jackson-jaxrs-json-provider</artifactId>
+                </exclusion>
+
+                <!-- use the version supplied by bouncycastle-api -->
+                <exclusion>
+                    <groupId>org.bouncycastle</groupId>
+                    <artifactId>bcpkix-jdk15on</artifactId>
                 </exclusion>
 
                 <!-- use versions supplied with Jenkins -->
@@ -88,12 +96,30 @@
                     <artifactId>httpclient</artifactId>
                 </exclusion>
                 <exclusion>
+                    <groupId>org.apache.httpcomponents</groupId>
+                    <artifactId>httpcore</artifactId>
+                </exclusion>
+                <exclusion>
                     <groupId>org.glassfish.jersey.core</groupId>
                     <artifactId>jersey-client</artifactId>
                 </exclusion>
                 <exclusion>
+                    <groupId>org.glassfish.jersey.inject</groupId>
+                    <artifactId>jersey-hk2</artifactId>
+                </exclusion>
+                <exclusion>
                     <groupId>com.google.guava</groupId>
                     <artifactId>guava</artifactId>
+                </exclusion>
+
+                <!-- junixsocket > 2.0 is targetted to Java 9 -->
+                <exclusion>
+                    <groupId>com.kohlschutter.junixsocket</groupId>
+                    <artifactId>junixsocket-common</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.kohlschutter.junixsocket</groupId>
+                    <artifactId>junixsocket-native-common</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>

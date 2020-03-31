@@ -10,7 +10,7 @@ See also this [plugin's wiki page][wiki]
 
 The following build environment is required to build this plugin
 
-* `java-1.7` and `maven-3.0.5`
+* `java-1.8` and `maven-3.5.0`
 
 # Build
 
