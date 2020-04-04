@@ -9,7 +9,7 @@
     </parent>
 
     <artifactId>docker-java-api</artifactId>
-    <version>${revision}${changelist}</version>
+    <version>${revision}.2${changelist}</version>
     <packaging>hpi</packaging>
 
     <name>Docker API Plugin</name>
@@ -25,7 +25,7 @@
 
     <properties>
         <revision>3.1.5</revision>
-        <changelist>.2-SNAPSHOT</changelist>
+        <changelist>-SNAPSHOT</changelist>
         <jenkins.version>1.609.1</jenkins.version>
         <java.level>8</java.level>
         <hpi.compatibleSinceVersion>3.1</hpi.compatibleSinceVersion>
@@ -107,10 +107,6 @@
                 <exclusion>
                     <groupId>org.glassfish.jersey.inject</groupId>
                     <artifactId>jersey-hk2</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.google.guava</groupId>
-                    <artifactId>guava</artifactId>
                 </exclusion>
 
                 <!-- junixsocket > 2.0 is targetted to Java 9 -->
