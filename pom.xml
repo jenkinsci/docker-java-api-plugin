@@ -12,6 +12,38 @@
     <version>${revision}-${changelist}</version>
     <packaging>hpi</packaging>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.jenkins.tools.bom</groupId>
+                <artifactId>bom-2.235.x</artifactId>
+                <version>21</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>jcl-over-slf4j</artifactId>
+                <version>1.7.30</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>log4j-over-slf4j</artifactId>
+                <version>1.7.30</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>1.7.30</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-jdk14</artifactId>
+                <version>1.7.30</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <name>Docker API Plugin</name>
     <description>Plugin providing Docker API for other plugins. Wrap docker-java and required dependency for Netty transport only. JAX-RS default transport is not usable</description>
     <url>https://github.com/jenkinsci/docker-java-api-plugin</url>
@@ -24,9 +56,9 @@
     </scm>
 
     <properties>
-        <revision>3.1.5</revision>
+        <revision>3.2.2</revision>
         <changelist>999999-SNAPSHOT</changelist>
-        <jenkins.version>1.609.1</jenkins.version>
+        <jenkins.version>2.235.1</jenkins.version>
         <java.level>8</java.level>
         <hpi.compatibleSinceVersion>3.1</hpi.compatibleSinceVersion>
     </properties>
@@ -124,7 +156,6 @@
         <dependency>
             <groupId>org.jenkins-ci.plugins</groupId>
             <artifactId>jackson2-api</artifactId>
-            <version>2.6.4</version>
         </dependency>
     </dependencies>
 </project>
