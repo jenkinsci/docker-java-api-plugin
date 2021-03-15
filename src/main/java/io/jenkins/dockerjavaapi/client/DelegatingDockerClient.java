@@ -43,7 +43,16 @@ import com.github.dockerjava.api.model.*;
  * Simple delegate class for the {@link DockerClient} interface.
  * <p>
  * This makes it easy for other classes to override specific methods without
- * having to implement all of them.
+ * having to implement all of them. Every method here:
+ * <ul>
+ * <li>calls {@link #getDelegate()},</li>
+ * <li>calls the matching method on the delegate class,</li>
+ * <li>for methods that return void, calls {@link #interceptVoid()} and then
+ * returns,</li>
+ * <li>for other methods, calls {@link #interceptAnswer(Object)}, passing in the
+ * delegate method's answer and returns whatever
+ * {@link #interceptAnswer(Object)} returned.</li>
+ * </ul>
  * </p>
  * If you are writing a Jenkins plugin that needs a class to implement/wrap
  * {@link DockerClient}, you'd be best advised to extend this one, otherwise
@@ -75,363 +84,382 @@ public class DelegatingDockerClient implements DockerClient {
         return delegate;
     }
 
+    /**
+     * Called just before the result is returned. Allows a subclass to act just
+     * before the method returns and/or to alter the result.
+     * 
+     * @param originalAnswer The result from the delegate.
+     * @return The result to be returned instead.
+     */
+    protected <T> T interceptAnswer(T originalAnswer) {
+        return originalAnswer;
+    }
+
+    /**
+     * Called just before the method returns void. Allows a subclass to act just
+     * before the method returns.
+     */
+    protected void interceptVoid() {
+    }
+
     @Override
     public AttachContainerCmd attachContainerCmd(String arg0) {
-        return getDelegate().attachContainerCmd(arg0);
+        return interceptAnswer(getDelegate().attachContainerCmd(arg0));
     }
 
     @Override
     public AuthCmd authCmd() {
-        return getDelegate().authCmd();
+        return interceptAnswer(getDelegate().authCmd());
     }
 
     @Override
     public AuthConfig authConfig() throws DockerException {
-        return getDelegate().authConfig();
+        return interceptAnswer(getDelegate().authConfig());
     }
 
     @Override
     public BuildImageCmd buildImageCmd() {
-        return getDelegate().buildImageCmd();
+        return interceptAnswer(getDelegate().buildImageCmd());
     }
 
     @Override
     public BuildImageCmd buildImageCmd(File arg0) {
-        return getDelegate().buildImageCmd(arg0);
+        return interceptAnswer(getDelegate().buildImageCmd(arg0));
     }
 
     @Override
     public BuildImageCmd buildImageCmd(InputStream arg0) {
-        return getDelegate().buildImageCmd(arg0);
+        return interceptAnswer(getDelegate().buildImageCmd(arg0));
     }
 
     @Override
     public void close() throws IOException {
         getDelegate().close();
+        interceptVoid();
     }
 
     @Override
     public CommitCmd commitCmd(String arg0) {
-        return getDelegate().commitCmd(arg0);
+        return interceptAnswer(getDelegate().commitCmd(arg0));
     }
 
     @Override
     public ConnectToNetworkCmd connectToNetworkCmd() {
-        return getDelegate().connectToNetworkCmd();
+        return interceptAnswer(getDelegate().connectToNetworkCmd());
     }
 
     @Override
     public ContainerDiffCmd containerDiffCmd(String arg0) {
-        return getDelegate().containerDiffCmd(arg0);
+        return interceptAnswer(getDelegate().containerDiffCmd(arg0));
     }
 
     @Override
     public CopyArchiveFromContainerCmd copyArchiveFromContainerCmd(String arg0, String arg1) {
-        return getDelegate().copyArchiveFromContainerCmd(arg0, arg1);
+        return interceptAnswer(getDelegate().copyArchiveFromContainerCmd(arg0, arg1));
     }
 
     @Override
     public CopyArchiveToContainerCmd copyArchiveToContainerCmd(String arg0) {
-        return getDelegate().copyArchiveToContainerCmd(arg0);
+        return interceptAnswer(getDelegate().copyArchiveToContainerCmd(arg0));
     }
 
     @Override
     public CopyFileFromContainerCmd copyFileFromContainerCmd(String arg0, String arg1) {
-        return getDelegate().copyFileFromContainerCmd(arg0, arg1);
+        return interceptAnswer(getDelegate().copyFileFromContainerCmd(arg0, arg1));
     }
 
     @Override
     public CreateContainerCmd createContainerCmd(String arg0) {
-        return getDelegate().createContainerCmd(arg0);
+        return interceptAnswer(getDelegate().createContainerCmd(arg0));
     }
 
     @Override
     public CreateImageCmd createImageCmd(String arg0, InputStream arg1) {
-        return getDelegate().createImageCmd(arg0, arg1);
+        return interceptAnswer(getDelegate().createImageCmd(arg0, arg1));
     }
 
     @Override
     public CreateNetworkCmd createNetworkCmd() {
-        return getDelegate().createNetworkCmd();
+        return interceptAnswer(getDelegate().createNetworkCmd());
     }
 
     @Override
     public CreateVolumeCmd createVolumeCmd() {
-        return getDelegate().createVolumeCmd();
+        return interceptAnswer(getDelegate().createVolumeCmd());
     }
 
     @Override
     public DisconnectFromNetworkCmd disconnectFromNetworkCmd() {
-        return getDelegate().disconnectFromNetworkCmd();
+        return interceptAnswer(getDelegate().disconnectFromNetworkCmd());
     }
 
     @Override
     public EventsCmd eventsCmd() {
-        return getDelegate().eventsCmd();
+        return interceptAnswer(getDelegate().eventsCmd());
     }
 
     @Override
     public ExecCreateCmd execCreateCmd(String arg0) {
-        return getDelegate().execCreateCmd(arg0);
+        return interceptAnswer(getDelegate().execCreateCmd(arg0));
     }
 
     @Override
     public ExecStartCmd execStartCmd(String arg0) {
-        return getDelegate().execStartCmd(arg0);
+        return interceptAnswer(getDelegate().execStartCmd(arg0));
     }
 
     @Override
     public InfoCmd infoCmd() {
-        return getDelegate().infoCmd();
+        return interceptAnswer(getDelegate().infoCmd());
     }
 
     @Override
     public InspectContainerCmd inspectContainerCmd(String arg0) {
-        return getDelegate().inspectContainerCmd(arg0);
+        return interceptAnswer(getDelegate().inspectContainerCmd(arg0));
     }
 
     @Override
     public InspectExecCmd inspectExecCmd(String arg0) {
-        return getDelegate().inspectExecCmd(arg0);
+        return interceptAnswer(getDelegate().inspectExecCmd(arg0));
     }
 
     @Override
     public InspectImageCmd inspectImageCmd(String arg0) {
-        return getDelegate().inspectImageCmd(arg0);
+        return interceptAnswer(getDelegate().inspectImageCmd(arg0));
     }
 
     @Override
     public InspectNetworkCmd inspectNetworkCmd() {
-        return getDelegate().inspectNetworkCmd();
+        return interceptAnswer(getDelegate().inspectNetworkCmd());
     }
 
     @Override
     public InspectVolumeCmd inspectVolumeCmd(String arg0) {
-        return getDelegate().inspectVolumeCmd(arg0);
+        return interceptAnswer(getDelegate().inspectVolumeCmd(arg0));
     }
 
     @Override
     public KillContainerCmd killContainerCmd(String arg0) {
-        return getDelegate().killContainerCmd(arg0);
+        return interceptAnswer(getDelegate().killContainerCmd(arg0));
     }
 
     @Override
     public ListContainersCmd listContainersCmd() {
-        return getDelegate().listContainersCmd();
+        return interceptAnswer(getDelegate().listContainersCmd());
     }
 
     @Override
     public ListImagesCmd listImagesCmd() {
-        return getDelegate().listImagesCmd();
+        return interceptAnswer(getDelegate().listImagesCmd());
     }
 
     @Override
     public ListNetworksCmd listNetworksCmd() {
-        return getDelegate().listNetworksCmd();
+        return interceptAnswer(getDelegate().listNetworksCmd());
     }
 
     @Override
     public ListVolumesCmd listVolumesCmd() {
-        return getDelegate().listVolumesCmd();
+        return interceptAnswer(getDelegate().listVolumesCmd());
     }
 
     @Override
     public LoadImageCmd loadImageCmd(InputStream arg0) {
-        return getDelegate().loadImageCmd(arg0);
+        return interceptAnswer(getDelegate().loadImageCmd(arg0));
     }
 
     @Override
     public LogContainerCmd logContainerCmd(String arg0) {
-        return getDelegate().logContainerCmd(arg0);
+        return interceptAnswer(getDelegate().logContainerCmd(arg0));
     }
 
     @Override
     public PauseContainerCmd pauseContainerCmd(String arg0) {
-        return getDelegate().pauseContainerCmd(arg0);
+        return interceptAnswer(getDelegate().pauseContainerCmd(arg0));
     }
 
     @Override
     public PingCmd pingCmd() {
-        return getDelegate().pingCmd();
+        return interceptAnswer(getDelegate().pingCmd());
     }
 
     @Override
     public PullImageCmd pullImageCmd(String arg0) {
-        return getDelegate().pullImageCmd(arg0);
+        return interceptAnswer(getDelegate().pullImageCmd(arg0));
     }
 
     @Override
     public PushImageCmd pushImageCmd(String arg0) {
-        return getDelegate().pushImageCmd(arg0);
+        return interceptAnswer(getDelegate().pushImageCmd(arg0));
     }
 
     @Override
     public PushImageCmd pushImageCmd(Identifier arg0) {
-        return getDelegate().pushImageCmd(arg0);
+        return interceptAnswer(getDelegate().pushImageCmd(arg0));
     }
 
     @Override
     public RemoveContainerCmd removeContainerCmd(String arg0) {
-        return getDelegate().removeContainerCmd(arg0);
+        return interceptAnswer(getDelegate().removeContainerCmd(arg0));
     }
 
     @Override
     public RemoveImageCmd removeImageCmd(String arg0) {
-        return getDelegate().removeImageCmd(arg0);
+        return interceptAnswer(getDelegate().removeImageCmd(arg0));
     }
 
     @Override
     public RemoveNetworkCmd removeNetworkCmd(String arg0) {
-        return getDelegate().removeNetworkCmd(arg0);
+        return interceptAnswer(getDelegate().removeNetworkCmd(arg0));
     }
 
     @Override
     public RemoveVolumeCmd removeVolumeCmd(String arg0) {
-        return getDelegate().removeVolumeCmd(arg0);
+        return interceptAnswer(getDelegate().removeVolumeCmd(arg0));
     }
 
     @Override
     public RenameContainerCmd renameContainerCmd(String arg0) {
-        return getDelegate().renameContainerCmd(arg0);
+        return interceptAnswer(getDelegate().renameContainerCmd(arg0));
     }
 
     @Override
     public RestartContainerCmd restartContainerCmd(String arg0) {
-        return getDelegate().restartContainerCmd(arg0);
+        return interceptAnswer(getDelegate().restartContainerCmd(arg0));
     }
 
     @Override
     public SaveImageCmd saveImageCmd(String arg0) {
-        return getDelegate().saveImageCmd(arg0);
+        return interceptAnswer(getDelegate().saveImageCmd(arg0));
     }
 
     @Override
     public SearchImagesCmd searchImagesCmd(String arg0) {
-        return getDelegate().searchImagesCmd(arg0);
+        return interceptAnswer(getDelegate().searchImagesCmd(arg0));
     }
 
     @Override
     public StartContainerCmd startContainerCmd(String arg0) {
-        return getDelegate().startContainerCmd(arg0);
+        return interceptAnswer(getDelegate().startContainerCmd(arg0));
     }
 
     @Override
     public StatsCmd statsCmd(String arg0) {
-        return getDelegate().statsCmd(arg0);
+        return interceptAnswer(getDelegate().statsCmd(arg0));
     }
 
     @Override
     public StopContainerCmd stopContainerCmd(String arg0) {
-        return getDelegate().stopContainerCmd(arg0);
+        return interceptAnswer(getDelegate().stopContainerCmd(arg0));
     }
 
     @Override
     public TagImageCmd tagImageCmd(String arg0, String arg1, String arg2) {
-        return getDelegate().tagImageCmd(arg0, arg1, arg2);
+        return interceptAnswer(getDelegate().tagImageCmd(arg0, arg1, arg2));
     }
 
     @Override
     public TopContainerCmd topContainerCmd(String arg0) {
-        return getDelegate().topContainerCmd(arg0);
+        return interceptAnswer(getDelegate().topContainerCmd(arg0));
     }
 
     @Override
     public UnpauseContainerCmd unpauseContainerCmd(String arg0) {
-        return getDelegate().unpauseContainerCmd(arg0);
+        return interceptAnswer(getDelegate().unpauseContainerCmd(arg0));
     }
 
     @Override
     public UpdateContainerCmd updateContainerCmd(String arg0) {
-        return getDelegate().updateContainerCmd(arg0);
+        return interceptAnswer(getDelegate().updateContainerCmd(arg0));
     }
 
     @Override
     public VersionCmd versionCmd() {
-        return getDelegate().versionCmd();
+        return interceptAnswer(getDelegate().versionCmd());
     }
 
     @Override
     public WaitContainerCmd waitContainerCmd(String arg0) {
-        return getDelegate().waitContainerCmd(arg0);
+        return interceptAnswer(getDelegate().waitContainerCmd(arg0));
     }
 
     @Override
     public InitializeSwarmCmd initializeSwarmCmd(SwarmSpec swarmSpec) {
-        return getDelegate().initializeSwarmCmd(swarmSpec);
+        return interceptAnswer(getDelegate().initializeSwarmCmd(swarmSpec));
     }
 
     @Override
     public InspectSwarmCmd inspectSwarmCmd() {
-        return getDelegate().inspectSwarmCmd();
+        return interceptAnswer(getDelegate().inspectSwarmCmd());
     }
 
     @Override
     public JoinSwarmCmd joinSwarmCmd() {
-        return getDelegate().joinSwarmCmd();
+        return interceptAnswer(getDelegate().joinSwarmCmd());
     }
 
     @Override
     public LeaveSwarmCmd leaveSwarmCmd() {
-        return getDelegate().leaveSwarmCmd();
+        return interceptAnswer(getDelegate().leaveSwarmCmd());
     }
 
     @Override
     public UpdateSwarmCmd updateSwarmCmd(SwarmSpec swarmSpec) {
-        return getDelegate().updateSwarmCmd(swarmSpec);
+        return interceptAnswer(getDelegate().updateSwarmCmd(swarmSpec));
     }
 
     @Override
     public UpdateSwarmNodeCmd updateSwarmNodeCmd() {
-        return getDelegate().updateSwarmNodeCmd();
+        return interceptAnswer(getDelegate().updateSwarmNodeCmd());
     }
 
     @Override
     public ListSwarmNodesCmd listSwarmNodesCmd() {
-        return getDelegate().listSwarmNodesCmd();
+        return interceptAnswer(getDelegate().listSwarmNodesCmd());
     }
 
     @Override
     public ListServicesCmd listServicesCmd() {
-        return getDelegate().listServicesCmd();
+        return interceptAnswer(getDelegate().listServicesCmd());
     }
 
     @Override
     public CreateServiceCmd createServiceCmd(ServiceSpec serviceSpec) {
-        return getDelegate().createServiceCmd(serviceSpec);
+        return interceptAnswer(getDelegate().createServiceCmd(serviceSpec));
     }
 
     @Override
     public InspectServiceCmd inspectServiceCmd(String serviceId) {
-        return getDelegate().inspectServiceCmd(serviceId);
+        return interceptAnswer(getDelegate().inspectServiceCmd(serviceId));
     }
 
     @Override
     public UpdateServiceCmd updateServiceCmd(String serviceId, ServiceSpec serviceSpec) {
-        return getDelegate().updateServiceCmd(serviceId, serviceSpec);
+        return interceptAnswer(getDelegate().updateServiceCmd(serviceId, serviceSpec));
     }
 
     @Override
     public RemoveServiceCmd removeServiceCmd(String serviceId) {
-        return getDelegate().removeServiceCmd(serviceId);
+        return interceptAnswer(getDelegate().removeServiceCmd(serviceId));
     }
 
     @Override
     public ListTasksCmd listTasksCmd() {
-        return getDelegate().listTasksCmd();
+        return interceptAnswer(getDelegate().listTasksCmd());
     }
 
     @Override
     public LogSwarmObjectCmd logServiceCmd(String serviceId) {
-        return getDelegate().logServiceCmd(serviceId);
+        return interceptAnswer(getDelegate().logServiceCmd(serviceId));
     }
 
     @Override
     public LogSwarmObjectCmd logTaskCmd(String taskId) {
-        return getDelegate().logTaskCmd(taskId);
+        return interceptAnswer(getDelegate().logTaskCmd(taskId));
     }
 
     @Override
     public PruneCmd pruneCmd(PruneType pruneType) {
-        return getDelegate().pruneCmd(pruneType);
+        return interceptAnswer(getDelegate().pruneCmd(pruneType));
     }
 }

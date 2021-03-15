@@ -22,10 +22,9 @@ package io.jenkins.dockerjavaapi.client;
 
 import static org.hamcrest.CoreMatchers.sameInstance;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 import java.lang.reflect.Constructor;
@@ -38,6 +37,7 @@ import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.mockito.InOrder;
 import org.mockito.exceptions.base.MockitoException;
 
 import com.github.dockerjava.api.DockerClient;
@@ -57,7 +57,7 @@ public class DelegatingDockerClientTest {
      * Each element in the returned {@link Iterable} is an Object[] whose contents
      * matches the arguments taken by this class's constructor.
      * </p>
-     * The annotation <code>name = "{0}"</code> says that the name of each set of
+     * Note: The annotation <code>name = "{0}"</code> says that the name of each set of
      * data should be first element of the array.
      * 
      * @return {@link Iterable} of [ {@link String}, {@link Method} ].
@@ -99,6 +99,32 @@ public class DelegatingDockerClientTest {
         this.dockerClientMethod = dockerClientMethod;
     }
 
+    private interface HookPoints {
+        void interceptAnswerCalled(Object originalAnswer);
+
+        void interceptVoidCalled();
+    }
+
+    private static class DelegatingDockerClientUnderTest extends DelegatingDockerClient {
+        final HookPoints hooks = mock(HookPoints.class);
+
+        protected DelegatingDockerClientUnderTest(DockerClient delegate) {
+            super(delegate);
+        }
+
+        @Override
+        protected <T> T interceptAnswer(T originalAnswer) {
+            hooks.interceptAnswerCalled(originalAnswer);
+            return super.interceptAnswer(originalAnswer);
+        }
+
+        @Override
+        protected void interceptVoid() {
+            hooks.interceptVoidCalled();
+            super.interceptVoid();
+        }
+    }
+
     @Test
     public void methodIsDelegatedCorrectly() throws Exception {
         // Given
@@ -111,7 +137,7 @@ public class DelegatingDockerClientTest {
         if (mockReturnValue != null) {
             when(dockerClientMethod.invoke(mockDelegate, mockParameters)).thenReturn(mockReturnValue);
         }
-        final DelegatingDockerClient instanceUnderTest = new DelegatingDockerClient(mockDelegate);
+        final DelegatingDockerClientUnderTest instanceUnderTest = new DelegatingDockerClientUnderTest(mockDelegate);
 
         // When
         final Object actualReturnValue = dockerClientMethod.invoke(instanceUnderTest, mockParameters);
@@ -120,8 +146,14 @@ public class DelegatingDockerClientTest {
         if (mockReturnValue != null) {
             assertThat("Returned value is what delegate returned", actualReturnValue, sameInstance(mockReturnValue));
         }
-        dockerClientMethod.invoke(verify(mockDelegate, times(1)), mockParameters);
-        verifyNoMoreInteractions(mockDelegate);
+        final InOrder inOrder = inOrder(mockDelegate, instanceUnderTest.hooks);
+        dockerClientMethod.invoke(inOrder.verify(mockDelegate, times(1)), mockParameters);
+        if (mockReturnValue != null) {
+            inOrder.verify(instanceUnderTest.hooks).interceptAnswerCalled(actualReturnValue);
+        } else {
+            inOrder.verify(instanceUnderTest.hooks).interceptVoidCalled();
+        }
+        inOrder.verifyNoMoreInteractions();
     }
 
     private static Object[] createFakeArgumentValues(final Parameter[] methodParameters) throws Exception {
