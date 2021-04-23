@@ -53,10 +53,11 @@ import com.github.dockerjava.api.model.*;
  * delegate method's answer and returns whatever
  * {@link #interceptAnswer(Object)} returned.</li>
  * </ul>
- * </p>
+ * <p>
  * If you are writing a Jenkins plugin that needs a class to implement/wrap
  * {@link DockerClient}, you'd be best advised to extend this one, otherwise
- * your code could fail whenever the version of this plugin changes.
+ * your code could fail whenever the version of this plugin changes and the
+ * {@link DockerClient} gains additional methods.
  */
 @SuppressWarnings("deprecation")
 public class DelegatingDockerClient implements DockerClient {
@@ -75,7 +76,8 @@ public class DelegatingDockerClient implements DockerClient {
 
     /**
      * Obtains the underlying {@link DockerClient} interface. Subclasses can
-     * override this if they need to hook into every call.
+     * override this if they need to hook into every call before anything else
+     * happens.
      *
      * @return the {@link DockerClient} to be delegated to.
      */
@@ -85,10 +87,18 @@ public class DelegatingDockerClient implements DockerClient {
     }
 
     /**
-     * Called just before the result is returned. Allows a subclass to act just
-     * before the method returns and/or to alter the result.
+     * Called just before the result is returned. Subclasses can override this if
+     * they need to hook into every call just before the method returns and/or to
+     * alter the result.
+     * <p>
+     * Note: If a subclass only wishes to act upon certain specific
+     * {@link DockerClient} calls then it may be clearer to override those specific
+     * methods instead. This hook is intended for use by subclasses that need to act
+     * upon "all methods" or need to act on methods that were not part of the
+     * {@link DockerClient} API at the time they were implemented.
      * 
      * @param originalAnswer The result from the delegate.
+     * @param                <T> The type of the <code>originalAnswer</code>.
      * @return The result to be returned instead.
      */
     protected <T> T interceptAnswer(T originalAnswer) {
@@ -98,6 +108,12 @@ public class DelegatingDockerClient implements DockerClient {
     /**
      * Called just before the method returns void. Allows a subclass to act just
      * before the method returns.
+     * <p>
+     * Note: If a subclass only wishes to act upon certain specific
+     * {@link DockerClient} calls then it may be clearer to override those specific
+     * methods instead. This hook is intended for use by subclasses that need to act
+     * upon "all methods" or need to act on methods that were not part of the
+     * {@link DockerClient} API at the time they were implemented.
      */
     protected void interceptVoid() {
     }
