@@ -1,166 +1,162 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-  <parent>
-    <groupId>org.jenkins-ci.plugins</groupId>
-    <artifactId>plugin</artifactId>
-    <version>3.56</version>
-  </parent>
+    <parent>
+        <groupId>org.jenkins-ci.plugins</groupId>
+        <artifactId>plugin</artifactId>
+        <version>3.56</version>
+    </parent>
 
-  <artifactId>docker-java-api</artifactId>
-  <version>${revision}.3${changelist}</version>
-  <packaging>hpi</packaging>
+    <artifactId>docker-java-api</artifactId>
+    <version>3.2.7-EDF</version>
+    <packaging>hpi</packaging>
 
-  <name>Docker API Plugin</name>
-  <description>Plugin providing Docker API for other plugins. Wrap docker-java and required dependency for Netty transport only. JAX-RS default transport is not usable</description>
-  <url>https://github.com/jenkinsci/docker-java-api-plugin</url>
-
-  <scm>
-    <connection>scm:git:ssh://github.com/jenkinsci/docker-java-api-plugin.git</connection>
-    <developerConnection>scm:git:ssh://git@github.com/jenkinsci/docker-java-api-plugin.git</developerConnection>
+    <name>Docker API Plugin</name>
+    <description>Plugin providing Docker API for other plugins. Wrap docker-java and required dependency for Apache Http transport only. JAX-RS default transport is not usable</description>
     <url>https://github.com/jenkinsci/docker-java-api-plugin</url>
-    <tag>${scmTag}</tag>
-  </scm>
 
-  <properties>
-    <revision>3.2.7</revision>
-    <changelist>-SNAPSHOT</changelist>
-    <jenkins.version>1.609.1</jenkins.version>
-    <java.level>8</java.level>
-    <hpi.compatibleSinceVersion>3.1</hpi.compatibleSinceVersion>
-  </properties>
+    <scm>
+        <connection>scm:git:ssh://github.com/jenkinsci/docker-java-api-plugin.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/jenkinsci/docker-java-api-plugin.git</developerConnection>
+        <url>https://github.com/jenkinsci/docker-java-api-plugin</url>
+        <tag>${scmTag}</tag>
+    </scm>
 
-  <licenses>
-    <license>
-      <name>MIT</name>
-      <url>http://opensource.org/licenses/MIT</url>
-    </license>
-  </licenses>
+    <properties>
+        <revision>3.2.7</revision>
+        <changelist>-SNAPSHOT</changelist>
+        <jenkins.version>1.609.1</jenkins.version>
+        <java.level>8</java.level>
+        <hpi.compatibleSinceVersion>3.1</hpi.compatibleSinceVersion>
+    </properties>
 
-  <repositories>
-    <repository>
-      <id>repo.jenkins-ci.org</id>
-      <url>https://repo.jenkins-ci.org/public/</url>
-    </repository>
-  </repositories>
-  <pluginRepositories>
-    <pluginRepository>
-      <id>repo.jenkins-ci.org</id>
-      <url>https://repo.jenkins-ci.org/public/</url>
-    </pluginRepository>
-  </pluginRepositories>
+    <licenses>
+        <license>
+            <name>MIT</name>
+            <url>http://opensource.org/licenses/MIT</url>
+        </license>
+    </licenses>
 
-  <dependencies>
-    <dependency>
-      <groupId>com.github.docker-java</groupId>
-      <artifactId>docker-java</artifactId>
-      <version>${revision}</version>
-      <exclusions>
-        <!-- use the version supplied by jackson2-api -->
-        <exclusion>
-          <groupId>com.fasterxml.jackson.core</groupId>
-          <artifactId>jackson-databind</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>com.fasterxml.jackson.jaxrs</groupId>
-          <artifactId>jackson-jaxrs-json-provider</artifactId>
-        </exclusion>
+    <repositories>
+        <repository>
+            <id>repo.jenkins-ci.org</id>
+            <url>https://repo.jenkins-ci.org/public/</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>repo.jenkins-ci.org</id>
+            <url>https://repo.jenkins-ci.org/public/</url>
+        </pluginRepository>
+    </pluginRepositories>
 
-        <!-- use the version supplied by bouncycastle-api -->
-        <exclusion>
-          <groupId>org.bouncycastle</groupId>
-          <artifactId>bcpkix-jdk15on</artifactId>
-        </exclusion>
+    <dependencies>
+        <dependency>
+            <groupId>com.github.docker-java</groupId>
+            <artifactId>docker-java</artifactId>
+            <version>${revision}</version>
+            <exclusions>
+                <!-- use the version supplied by jackson2-api -->
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-databind</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.jaxrs</groupId>
+                    <artifactId>jackson-jaxrs-json-provider</artifactId>
+                </exclusion>
 
-        <!-- use versions supplied with Jenkins -->
-        <exclusion>
-          <groupId>commons-codec</groupId>
-          <artifactId>commons-codec</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>commons-io</groupId>
-          <artifactId>commons-io</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>commons-lang</groupId>
-          <artifactId>commons-lang</artifactId>
-        </exclusion>
+                <!-- use the version supplied by bouncycastle-api -->
+                <exclusion>
+                    <groupId>org.bouncycastle</groupId>
+                    <artifactId>bcpkix-jdk15on</artifactId>
+                </exclusion>
 
-        <exclusion>
-          <groupId>org.slf4j</groupId>
-          <artifactId>slf4j-api</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.slf4j</groupId>
-          <artifactId>jcl-over-slf4j</artifactId>
-        </exclusion>
+                <!-- use versions supplied with Jenkins -->
+                <exclusion>
+                    <groupId>commons-codec</groupId>
+                    <artifactId>commons-codec</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>commons-io</groupId>
+                    <artifactId>commons-io</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>commons-lang</groupId>
+                    <artifactId>commons-lang</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>jcl-over-slf4j</artifactId>
+                </exclusion>
 
-        <!-- disable JAX-RS transport, otherwise, it requires shading and 
-          messy stuff -->
-        <exclusion>
-          <groupId>org.glassfish.jersey.connectors</groupId>
-          <artifactId>jersey-apache-connector</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.apache.httpcomponents</groupId>
-          <artifactId>httpclient</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.apache.httpcomponents</groupId>
-          <artifactId>httpcore</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.glassfish.jersey.core</groupId>
-          <artifactId>jersey-client</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.glassfish.jersey.inject</groupId>
-          <artifactId>jersey-hk2</artifactId>
-        </exclusion>
+                <!-- disable JAX-RS transport, otherwise, it requires shading and messy stuff -->
+                <exclusion>
+                    <groupId>org.glassfish.jersey.connectors</groupId>
+                    <artifactId>jersey-apache-connector</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.httpcomponents</groupId>
+                    <artifactId>httpclient</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.httpcomponents</groupId>
+                    <artifactId>httpcore</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.glassfish.jersey.core</groupId>
+                    <artifactId>jersey-client</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.glassfish.jersey.inject</groupId>
+                    <artifactId>jersey-hk2</artifactId>
+                </exclusion>
 
-        <!-- junixsocket > 2.0 is targetted to Java 9 -->
-        <exclusion>
-          <groupId>com.kohlschutter.junixsocket</groupId>
-          <artifactId>junixsocket-common</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>com.kohlschutter.junixsocket</groupId>
-          <artifactId>junixsocket-native-common</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
+                <!-- junixsocket > 2.0 is targetted to Java 9 -->
+                <exclusion>
+                    <groupId>com.kohlschutter.junixsocket</groupId>
+                    <artifactId>junixsocket-common</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.kohlschutter.junixsocket</groupId>
+                    <artifactId>junixsocket-native-common</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
 
-    <dependency>
-      <groupId>com.github.docker-java</groupId>
-      <artifactId>docker-java-transport-httpclient5</artifactId>
-      <version>${revision}</version>
-    </dependency>
+        <dependency>
+            <groupId>com.github.docker-java</groupId>
+            <artifactId>docker-java-transport-httpclient5</artifactId>
+            <version>${revision}</version>
+        </dependency>
 
-    <dependency>
-      <groupId>com.google.guava</groupId>
-      <artifactId>guava</artifactId>
-      <version>19.0</version>
-    </dependency>
+        <dependency>
+            <groupId>org.jenkins-ci.plugins</groupId>
+            <artifactId>jackson2-api</artifactId>
+            <version>2.10.3</version>
+        </dependency>
 
-    <dependency>
-      <groupId>org.jenkins-ci.plugins</groupId>
-      <artifactId>jackson2-api</artifactId>
-      <version>2.12.1</version>
-    </dependency>
-  </dependencies>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>19.0</version>
+        </dependency>
+    </dependencies>
 
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.jenkins-ci.tools</groupId>
-        <artifactId>maven-hpi-plugin</artifactId>
-        <configuration>
-          <maskClasses>com.google.common.</maskClasses>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.jenkins-ci.tools</groupId>
+                <artifactId>maven-hpi-plugin</artifactId>
+                <configuration>
+                    <maskClasses>com.google.common.</maskClasses>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
