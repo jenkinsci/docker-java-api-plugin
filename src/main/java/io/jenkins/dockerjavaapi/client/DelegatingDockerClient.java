@@ -478,4 +478,59 @@ public class DelegatingDockerClient implements DockerClient {
     public PruneCmd pruneCmd(PruneType pruneType) {
         return interceptAnswer(getDelegate().pruneCmd(pruneType));
     }
+
+    @Override
+    public RemoveConfigCmd removeConfigCmd(String configId) {
+        return interceptAnswer(getDelegate().removeConfigCmd(configId));
+    }
+
+    @Override
+    public InspectConfigCmd inspectConfigCmd(String configId) {
+        return interceptAnswer(getDelegate().inspectConfigCmd(configId));
+    }
+
+    @Override
+    public CreateConfigCmd createConfigCmd() {
+        return interceptAnswer(getDelegate().createConfigCmd());
+    }
+
+    @Override
+    public ListConfigsCmd listConfigsCmd() {
+        return interceptAnswer(getDelegate().listConfigsCmd());
+    }
+
+    @Override
+    public RemoveSecretCmd removeSecretCmd(String secretId) {
+        return interceptAnswer(getDelegate().removeSecretCmd(secretId));
+    }
+
+    @Override
+    public CreateSecretCmd createSecretCmd(SecretSpec secretSpec) {
+        return interceptAnswer(getDelegate().createSecretCmd(secretSpec));
+    }
+
+    @Override
+    public ListSecretsCmd listSecretsCmd() {
+        return interceptAnswer(getDelegate().listSecretsCmd());
+    }
+
+    @Override
+    public RemoveSwarmNodeCmd removeSwarmNodeCmd(String swarmNodeId) {
+        return interceptAnswer(getDelegate().removeSwarmNodeCmd(swarmNodeId));
+    }
+
+    @Override
+    public ResizeContainerCmd resizeContainerCmd(String containerId) {
+        return interceptAnswer(getDelegate().resizeContainerCmd(containerId));
+    }
+
+    @Override
+    public SaveImagesCmd saveImagesCmd() {
+        return interceptAnswer(getDelegate().saveImagesCmd());
+    }
+
+    @Override
+    public ResizeExecCmd resizeExecCmd(String execId) {
+        return interceptAnswer(getDelegate().resizeExecCmd(execId));
+    }
 }
