@@ -9,7 +9,7 @@
     </parent>
 
     <artifactId>docker-java-api</artifactId>
-    <version>${revision}-${changelist}</version>
+    <version>${revision}.3-${changelist}</version>
     <packaging>hpi</packaging>
 
     <name>Docker API Plugin</name>
