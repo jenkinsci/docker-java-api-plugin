@@ -9,7 +9,7 @@
     </parent>
 
     <artifactId>docker-java-api</artifactId>
-    <version>${revision}.3-${changelist}</version>
+    <version>${revision}-${changelist}</version>
     <packaging>hpi</packaging>
 
     <name>Docker API Plugin</name>
@@ -24,12 +24,12 @@
     </scm>
 
     <properties>
-        <revision>3.1.5</revision>
+        <revision>3.2.13</revision>
         <changelist>999999-SNAPSHOT</changelist>
         <jenkins.version>1.609.1</jenkins.version>
         <java.level>8</java.level>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <hpi.compatibleSinceVersion>3.1</hpi.compatibleSinceVersion>
+        <hpi.compatibleSinceVersion>3.2</hpi.compatibleSinceVersion>
     </properties>
 
     <licenses>
@@ -64,6 +64,10 @@
                     <artifactId>jackson-databind</artifactId>
                 </exclusion>
                 <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-annotations</artifactId>
+                </exclusion>
+                <exclusion>
                     <groupId>com.fasterxml.jackson.jaxrs</groupId>
                     <artifactId>jackson-jaxrs-json-provider</artifactId>
                 </exclusion>
@@ -86,6 +90,14 @@
                 <exclusion>
                     <groupId>commons-lang</groupId>
                     <artifactId>commons-lang</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>jcl-over-slf4j</artifactId>
                 </exclusion>
 
                 <!-- disable JAX-RS transport, otherwise, it requires shading and messy stuff -->
