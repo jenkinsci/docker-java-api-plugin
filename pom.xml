@@ -25,11 +25,23 @@
     <properties>
         <revision>3.2.13</revision>
         <changelist>999999-SNAPSHOT</changelist>
-        <jenkins.version>1.609.1</jenkins.version>
+       <jenkins.version>2.332.4</jenkins.version>
         <java.level>8</java.level>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <hpi.compatibleSinceVersion>3.2</hpi.compatibleSinceVersion>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+          <dependency>
+            <groupId>io.jenkins.tools.bom</groupId>
+            <artifactId>bom-2.332.x</artifactId>
+            <version>1595.v8c71c13cc3a_9</version>
+            <type>pom</type>
+            <scope>import</scope>
+          </dependency>
+        </dependencies>
+      </dependencyManagement>
 
     <licenses>
         <license>
@@ -145,11 +157,13 @@
             <version>2.2</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <version>2.10.0</version>
-            <scope>test</scope>
-        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
+<dependency>
+    <groupId>org.mockito</groupId>
+    <artifactId>mockito-core</artifactId>
+    <version>4.7.0</version>
+    <scope>test</scope>
+</dependency>
+
     </dependencies>
 </project>
