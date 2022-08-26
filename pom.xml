@@ -22,7 +22,7 @@
         <url>https://github.com/jenkinsci/docker-java-api-plugin</url>
         <tag>${scmTag}</tag>
     </scm>
-
+             <!-- properties section -->
     <properties>
         <revision>3.2.13</revision>
         <changelist>999999-SNAPSHOT</changelist>
