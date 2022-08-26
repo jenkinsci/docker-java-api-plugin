@@ -25,7 +25,8 @@
     <properties>
         <revision>3.2.13</revision>
         <changelist>999999-SNAPSHOT</changelist>
-       <jenkins.version>2.332.4</jenkins.version>
+       <jenkins.version>2.332.4</jenkins.version> <!-- used updated version of jenkins -->
+
         <java.level>8</java.level>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <hpi.compatibleSinceVersion>3.2</hpi.compatibleSinceVersion>
