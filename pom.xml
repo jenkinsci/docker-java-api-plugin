@@ -17,8 +17,8 @@
     <url>https://github.com/jenkinsci/docker-java-api-plugin</url>
 
     <scm>
-        <connection>scm:git:ssh://github.com/jenkinsci/docker-java-api-plugin.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com/jenkinsci/docker-java-api-plugin.git</developerConnection>
+        <connection>scm:git:https://github.com/jenkinsci/docker-java-api-plugin.git</connection>
+        <developerConnection>scm:git:git@github.com:jenkinsci/docker-java-api-plugin.git</developerConnection>
         <url>https://github.com/jenkinsci/docker-java-api-plugin</url>
         <tag>${scmTag}</tag>
     </scm>
