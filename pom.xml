@@ -25,7 +25,7 @@
     </scm>
 
     <properties>
-        <revision>3.2.13</revision>
+        <revision>3.2.14</revision>
         <changelist>999999-SNAPSHOT</changelist>
         <jenkins.version>2.361.3</jenkins.version>
         <gitHubRepo>jenkinsci/${project.artifactId}-plugin</gitHubRepo>
