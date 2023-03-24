@@ -27,7 +27,7 @@
     <properties>
         <revision>3.2.13</revision>
         <changelist>999999-SNAPSHOT</changelist>
-        <jenkins.version>2.361.3</jenkins.version>
+        <jenkins.version>2.361.4</jenkins.version>
         <gitHubRepo>jenkinsci/${project.artifactId}-plugin</gitHubRepo>
         <hpi.compatibleSinceVersion>3.2</hpi.compatibleSinceVersion>
     </properties>
@@ -164,7 +164,22 @@
                     <groupId>org.slf4j</groupId>
                     <artifactId>slf4j-api</artifactId>
                 </exclusion>
+                <!-- Provided by apache-httpcomponents-client-5-api plugin -->
+                <exclusion>
+                    <groupId>org.apache.httpcomponents.client5</groupId>
+                    <artifactId>httpclient5</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.httpcomponents.client5</groupId>
+                    <artifactId>httpcore5</artifactId>
+                </exclusion>
             </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>io.jenkins.plugins</groupId>
+            <artifactId>apache-httpcomponents-client-5-api</artifactId>
+            <version>5.2.1-1.0</version>
         </dependency>
 
         <dependency>
