@@ -23,7 +23,7 @@ package io.jenkins.dockerjavaapi.client;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import javax.annotation.Nonnull;
+import edu.umd.cs.findbugs.annotations.NonNull;
 
 import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.api.command.*;
@@ -70,7 +70,7 @@ public class DelegatingDockerClient implements DockerClient {
      *
      * @param delegate The {@link DockerClient} to delegate to.
      */
-    public DelegatingDockerClient(@Nonnull DockerClient delegate) {
+    public DelegatingDockerClient(@NonNull DockerClient delegate) {
         this.delegate = delegate;
     }
 
@@ -81,7 +81,7 @@ public class DelegatingDockerClient implements DockerClient {
      *
      * @return the {@link DockerClient} to be delegated to.
      */
-    @Nonnull
+    @NonNull
     protected DockerClient getDelegate() {
         return delegate;
     }
