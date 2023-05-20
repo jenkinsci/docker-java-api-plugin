@@ -57,7 +57,7 @@
             <dependency>
                 <groupId>io.jenkins.tools.bom</groupId>
                 <artifactId>bom-2.361.x</artifactId>
-                <version>1798.vc671fe94856f</version>
+                <version>2081.v85885a_d2e5c5</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
@@ -70,86 +70,62 @@
             <artifactId>docker-java</artifactId>
             <version>${revision}</version>
             <exclusions>
-                <!-- use the version supplied by jackson2-api -->
-                <exclusion>
-                    <groupId>com.fasterxml.jackson.core</groupId>
-                    <artifactId>jackson-databind</artifactId>
-                </exclusion>
+                <!-- Provided by jackson2-api plugin -->
                 <exclusion>
                     <groupId>com.fasterxml.jackson.core</groupId>
                     <artifactId>jackson-annotations</artifactId>
                 </exclusion>
                 <exclusion>
-                    <groupId>com.fasterxml.jackson.jaxrs</groupId>
-                    <artifactId>jackson-jaxrs-json-provider</artifactId>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-core</artifactId>
                 </exclusion>
-
-                <!-- use the version supplied by bouncycastle-api -->
                 <exclusion>
-                    <groupId>org.bouncycastle</groupId>
-                    <artifactId>bcpkix-jdk15on</artifactId>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-databind</artifactId>
                 </exclusion>
-
-                <!-- use versions supplied with Jenkins -->
+                <!-- Deprecated transport -->
                 <exclusion>
-                    <groupId>commons-codec</groupId>
-                    <artifactId>commons-codec</artifactId>
+                    <groupId>com.github.docker-java</groupId>
+                    <artifactId>docker-java-transport-jersey</artifactId>
+                </exclusion>
+                <!-- Provided by Jenkins core -->
+                <exclusion>
+                    <groupId>com.google.guava</groupId>
+                    <artifactId>guava</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>commons-compress</groupId>
+                    <artifactId>commons-compress</artifactId>
                 </exclusion>
                 <exclusion>
                     <groupId>commons-io</groupId>
                     <artifactId>commons-io</artifactId>
                 </exclusion>
-                <exclusion>
-                    <groupId>commons-lang</groupId>
-                    <artifactId>commons-lang</artifactId>
-                </exclusion>
+                <!-- Provided by commons-lang3-api plugin -->
                 <exclusion>
                     <groupId>org.apache.commons</groupId>
                     <artifactId>commons-lang3</artifactId>
+                </exclusion>
+                <!-- Provided by bouncycastle-api-plugin -->
+                <exclusion>
+                    <groupId>org.bouncycastle</groupId>
+                    <artifactId>bcpkix-jdk15on</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.bouncycastle</groupId>
+                    <artifactId>bcprov-jdk15on</artifactId>
+                </exclusion>
+                <!-- Provided by Jenkins core -->
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>jcl-over-slf4j</artifactId>
                 </exclusion>
                 <exclusion>
                     <groupId>org.slf4j</groupId>
                     <artifactId>slf4j-api</artifactId>
                 </exclusion>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>jcl-over-slf4j</artifactId>
-                </exclusion>
-
-                <!-- disable JAX-RS transport, otherwise, it requires shading and messy stuff -->
-                <exclusion>
-                    <groupId>org.glassfish.jersey.connectors</groupId>
-                    <artifactId>jersey-apache-connector</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.apache.httpcomponents</groupId>
-                    <artifactId>httpclient</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.apache.httpcomponents</groupId>
-                    <artifactId>httpcore</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.glassfish.jersey.core</groupId>
-                    <artifactId>jersey-client</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.glassfish.jersey.inject</groupId>
-                    <artifactId>jersey-hk2</artifactId>
-                </exclusion>
-
-                <!-- junixsocket > 2.0 is targetted to Java 9 -->
-                <exclusion>
-                    <groupId>com.kohlschutter.junixsocket</groupId>
-                    <artifactId>junixsocket-common</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.kohlschutter.junixsocket</groupId>
-                    <artifactId>junixsocket-native-common</artifactId>
-                </exclusion>
             </exclusions>
         </dependency>
-
         <dependency>
             <groupId>com.github.docker-java</groupId>
             <artifactId>docker-java-transport-httpclient5</artifactId>
@@ -157,12 +133,12 @@
             <exclusions>
                 <!-- Provided by Jenkins core -->
                 <exclusion>
-                    <groupId>net.java.dev.jna</groupId>
-                    <artifactId>jna</artifactId>
+                    <groupId>commons-codec</groupId>
+                    <artifactId>commons-codec</artifactId>
                 </exclusion>
                 <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-api</artifactId>
+                    <groupId>net.java.dev.jna</groupId>
+                    <artifactId>jna</artifactId>
                 </exclusion>
                 <!-- Provided by apache-httpcomponents-client-5-api plugin -->
                 <exclusion>
@@ -173,29 +149,28 @@
                     <groupId>org.apache.httpcomponents.client5</groupId>
                     <artifactId>httpcore5</artifactId>
                 </exclusion>
+                <!-- Provided by Jenkins core -->
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
-
         <dependency>
             <groupId>io.jenkins.plugins</groupId>
             <artifactId>apache-httpcomponents-client-5-api</artifactId>
-            <version>5.2.1-1.0</version>
         </dependency>
-
         <dependency>
             <groupId>io.jenkins.plugins</groupId>
             <artifactId>commons-lang3-api</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>org.jenkins-ci.plugins</groupId>
+            <artifactId>bouncycastle-api</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.jenkins-ci.plugins</groupId>
             <artifactId>jackson2-api</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-core</artifactId>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
