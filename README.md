@@ -9,7 +9,7 @@ Only Apache HttpClient 5 and Netty based transports are available; the Jersey tr
 
 The following build environment is required to build this plugin
 
-* `java-1.8` and `maven-3.5.0`
+* Java 11 and Maven 3.8.1
 
 # Build
 
