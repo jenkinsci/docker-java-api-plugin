@@ -283,6 +283,11 @@ public class DelegatingDockerClient implements DockerClient {
     }
 
     @Override
+    public LoadImageAsyncCmd loadImageAsyncCmd(@NonNull InputStream inputStream) {
+        return interceptAnswer(getDelegate().loadImageAsyncCmd(inputStream));
+    }
+
+    @Override
     public LogContainerCmd logContainerCmd(String arg0) {
         return interceptAnswer(getDelegate().logContainerCmd(arg0));
     }
