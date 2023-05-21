@@ -27,20 +27,18 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
 
+import com.github.dockerjava.api.DockerClient;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.mockito.InOrder;
 import org.mockito.exceptions.base.MockitoException;
-
-import com.github.dockerjava.api.DockerClient;
 
 /**
  * Ensures that every method in DelegatingDockerClient delegates to the matching
@@ -59,7 +57,7 @@ public class DelegatingDockerClientTest {
      * </p>
      * Note: The annotation <code>name = "{0}"</code> says that the name of each set of
      * data should be first element of the array.
-     * 
+     *
      * @return {@link Iterable} of [ {@link String}, {@link Method} ].
      */
     @Parameterized.Parameters(name = "{0}")
@@ -77,7 +75,7 @@ public class DelegatingDockerClientTest {
                 testCaseName.append(tName);
             }
             testCaseName.append(')');
-            final Object[] testCase = new Object[] { testCaseName.toString(), m };
+            final Object[] testCase = new Object[] {testCaseName.toString(), m};
             data.add(testCase);
         }
         data.sort(new Comparator<Object[]>() {
@@ -131,7 +129,8 @@ public class DelegatingDockerClientTest {
         final Parameter[] methodParameters = dockerClientMethod.getParameters();
         final Object[] mockParameters = createFakeArgumentValues(methodParameters);
         final Class<?> methodReturnType = dockerClientMethod.getReturnType();
-        final Object mockReturnValue = methodReturnType.equals(Void.TYPE) ? null
+        final Object mockReturnValue = methodReturnType.equals(Void.TYPE)
+                ? null
                 : createFakeObject(methodReturnType, dockerClientMethodName + "ReturnedValue");
         final DockerClient mockDelegate = mock(DockerClient.class, "mockDelegate");
         if (mockReturnValue != null) {
