@@ -20,15 +20,14 @@
 
 package io.jenkins.dockerjavaapi.client;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import edu.umd.cs.findbugs.annotations.NonNull;
-
 import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.api.command.*;
 import com.github.dockerjava.api.exception.DockerException;
 import com.github.dockerjava.api.model.*;
+import edu.umd.cs.findbugs.annotations.NonNull;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 
 // MAINTENANCE NOTE:
 // The DockerClient API varies depending on the version of the docker-java
@@ -96,7 +95,7 @@ public class DelegatingDockerClient implements DockerClient {
      * methods instead. This hook is intended for use by subclasses that need to act
      * upon "all methods" or need to act on methods that were not part of the
      * {@link DockerClient} API at the time they were implemented.
-     * 
+     *
      * @param originalAnswer The result from the delegate.
      * @param                <T> The type of the <code>originalAnswer</code>.
      * @return The result to be returned instead.
@@ -115,8 +114,7 @@ public class DelegatingDockerClient implements DockerClient {
      * upon "all methods" or need to act on methods that were not part of the
      * {@link DockerClient} API at the time they were implemented.
      */
-    protected void interceptVoid() {
-    }
+    protected void interceptVoid() {}
 
     @Override
     public AttachContainerCmd attachContainerCmd(String arg0) {
