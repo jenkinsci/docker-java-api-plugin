@@ -13,7 +13,7 @@
   <version>${revision}-${changelist}</version>
   <packaging>hpi</packaging>
   <name>Docker API Plugin</name>
-  <description>Plugin providing Docker API for other plugins. Wrap docker-java and required dependency for Netty transport only. JAX-RS default transport is not usable</description>
+  <description>Plugin providing Docker API for other plugins. Wrap docker-java and required dependency for Apache HttpClient 5 transport only. JAX-RS default transport is not usable</description>
   <url>https://github.com/jenkinsci/${project.artifactId}-plugin</url>
 
   <licenses>
@@ -70,10 +70,14 @@
           <groupId>com.fasterxml.jackson.core</groupId>
           <artifactId>jackson-databind</artifactId>
         </exclusion>
-        <!-- Deprecated transport -->
+        <!-- Deprecated transports -->
         <exclusion>
           <groupId>com.github.docker-java</groupId>
           <artifactId>docker-java-transport-jersey</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.github.docker-java</groupId>
+          <artifactId>docker-java-transport-netty</artifactId>
         </exclusion>
         <!-- Provided by Jenkins core -->
         <exclusion>
