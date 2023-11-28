@@ -3,7 +3,7 @@
 This plugin exposes the [docker-java](http://github.com/docker-java/docker-java) API to Jenkins plugins.
 Plugins using docker-java should depend on this plugin and not directly on docker-java.
 
-Only Apache HttpClient 5 and Netty based transports are available; the Jersey transport does not work.
+Only the Apache HttpClient 5 transport is available; the Jersey transport does not work.
 
 # Environment
 
