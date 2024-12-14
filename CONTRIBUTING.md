@@ -35,7 +35,6 @@ The following commands will open the `index.html` file in the browser.
 
 * Windows - `start target\site\jacoco\index.html`
 * Linux - `xdg-open target/site/jacoco/index.html`
-* Gitpod - `cd target/site/jacoco && python -m http.server 8000`
 
 The file will have a list of package names.
 Click on them to find a list of class names.
