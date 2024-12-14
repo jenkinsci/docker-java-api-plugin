@@ -1,32 +1,35 @@
 # Docker Java API Plugin
 
-This plugin exposes the [docker-java](http://github.com/docker-java/docker-java) API to Jenkins plugins.
+This plugin provides the [docker-java](http://github.com/docker-java/docker-java) API to Jenkins plugins.
 Plugins using docker-java should depend on this plugin and not directly on docker-java.
 
 Only the Apache HttpClient 5 transport is available; the Jersey transport does not work.
 
-# Environment
+## Using the API in your plugin
 
-The following build environment is required to build this plugin
+Replace the dependency to `com.github.docker-java:docker-java` with a dependency to `org.jenkins-ci.plugins:docker-java-api`.
+Avoid version conflicts by using the [Jenkins plugin BOM](https://github.com/jenkinsci/bom#readme) rather than depending on a specific version.
 
-* Java 11 and Maven 3.8.1
-
-# Build
-
-To build the plugin locally:
-
-    mvn clean verify
-
-# Release
-
-To release the plugin:
-
-    mvn release:prepare release:perform -B
-
-# Test local instance
-
-To test in a local Jenkins instance
-
-    mvn hpi:run
-
-  [wiki]: http://wiki.jenkins-ci.org/display/JENKINS/Docker+Java+API+Plugin
+* Before:
+    ```
+    <dependencies>
+      ...
+      <dependency>
+        <groupId>com.github.docker-java</groupId>
+        <artifactId>docker-java</artifactId>
+        <version>3.4.1</version>
+      </dependency>
+      ...
+    </dependencies>
+    ```
+* After:
+    ```
+    <dependencies>
+      ...
+      <dependency>
+        <groupId>org.jenkins-ci.plugins</groupId>
+        <artifactId>docker-java-api</artifactId>
+      </dependency>
+      ...
+    </dependencies>
+    ```
