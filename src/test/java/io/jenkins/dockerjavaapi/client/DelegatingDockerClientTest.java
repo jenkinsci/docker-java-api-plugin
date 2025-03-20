@@ -21,7 +21,7 @@
 package io.jenkins.dockerjavaapi.client;
 
 import static org.hamcrest.CoreMatchers.sameInstance;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
@@ -32,11 +32,9 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.InOrder;
 import org.mockito.exceptions.base.MockitoException;
 
@@ -45,8 +43,7 @@ import org.mockito.exceptions.base.MockitoException;
  * method in the instance it delegates to. Uses reflection/introspection to
  * ensure that this class doesn't need updating if new methods are added.
  */
-@RunWith(Parameterized.class)
-public class DelegatingDockerClientTest {
+class DelegatingDockerClientTest {
 
     /**
      * Defines the set of data that all test methods (in this test class) will be
@@ -60,8 +57,7 @@ public class DelegatingDockerClientTest {
      *
      * @return {@link Iterable} of [ {@link String}, {@link Method} ].
      */
-    @Parameterized.Parameters(name = "{0}")
-    public static Iterable<Object[]> data() {
+    static Iterable<Object[]> data() {
         final List<Object[]> data = new ArrayList<>();
         final Method[] declaredMethods = DockerClient.class.getDeclaredMethods();
         for (Method m : declaredMethods) {
@@ -78,23 +74,12 @@ public class DelegatingDockerClientTest {
             final Object[] testCase = new Object[] {testCaseName.toString(), m};
             data.add(testCase);
         }
-        data.sort(new Comparator<Object[]>() {
-            @Override
-            public int compare(Object[] o1, Object[] o2) {
-                final String n1 = (String) o1[0];
-                final String n2 = (String) o2[0];
-                return n1.compareTo(n2);
-            }
+        data.sort((o1, o2) -> {
+            final String n1 = (String) o1[0];
+            final String n2 = (String) o2[0];
+            return n1.compareTo(n2);
         });
         return data;
-    }
-
-    private final String dockerClientMethodName;
-    private final Method dockerClientMethod;
-
-    public DelegatingDockerClientTest(String methodName, Method dockerClientMethod) {
-        this.dockerClientMethodName = methodName;
-        this.dockerClientMethod = dockerClientMethod;
     }
 
     private interface HookPoints {
@@ -123,8 +108,9 @@ public class DelegatingDockerClientTest {
         }
     }
 
-    @Test
-    public void methodIsDelegatedCorrectly() throws Exception {
+    @ParameterizedTest(name = "{0}")
+    @MethodSource("data")
+    void methodIsDelegatedCorrectly(String dockerClientMethodName, Method dockerClientMethod) throws Exception {
         // Given
         final Parameter[] methodParameters = dockerClientMethod.getParameters();
         final Object[] mockParameters = createFakeArgumentValues(methodParameters);
@@ -179,7 +165,7 @@ public class DelegatingDockerClientTest {
             // can access and make a real instance instead of a mock.
             // MAINTENANCE NOTE:
             // So far we've gotten away with only looking for a default constructor.
-            // If, in future, this isn't enough then we could try picking another
+            // If, in the future, this isn't enough then we could try picking another
             // constructor and trying to fake any arguments it needs.
             final Constructor<?> defaultConstructor = paramType.getConstructor();
             return defaultConstructor.newInstance();
