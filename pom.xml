@@ -31,7 +31,7 @@
   </scm>
 
   <properties>
-    <revision>3.4.2</revision>
+    <revision>3.5.0</revision>
     <changelist>999999-SNAPSHOT</changelist>
     <!-- https://www.jenkins.io/doc/developer/plugin-development/choosing-jenkins-baseline/ -->
     <jenkins.baseline>2.479</jenkins.baseline>
@@ -157,6 +157,8 @@
     <dependency>
       <groupId>io.jenkins.plugins</groupId>
       <artifactId>apache-httpcomponents-client-5-api</artifactId>
+      <!-- TODO until in BOM -->
+      <version>5.4.3-140.v2516ccde99e7</version>
     </dependency>
     <dependency>
       <groupId>io.jenkins.plugins</groupId>
