@@ -157,8 +157,6 @@
     <dependency>
       <groupId>io.jenkins.plugins</groupId>
       <artifactId>apache-httpcomponents-client-5-api</artifactId>
-      <!-- TODO until in BOM -->
-      <version>5.4.4-144.vc483d91903d2</version>
     </dependency>
     <dependency>
       <groupId>io.jenkins.plugins</groupId>
