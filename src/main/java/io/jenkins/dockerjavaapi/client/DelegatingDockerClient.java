@@ -536,4 +536,14 @@ public class DelegatingDockerClient implements DockerClient {
     public ResizeExecCmd resizeExecCmd(String execId) {
         return interceptAnswer(getDelegate().resizeExecCmd(execId));
     }
+
+    @Override
+    public ImageHistoryCmd imageHistoryCmd(@NonNull String imageId) {
+        return interceptAnswer(getDelegate().imageHistoryCmd(imageId));
+    }
+
+    @Override
+    public ExportContainerCmd exportContainerCmd(@NonNull String containerId) {
+        return interceptAnswer(getDelegate().exportContainerCmd(containerId));
+    }
 }
